@@ -8,6 +8,8 @@ Perhaps if you are co-developing with a partner and he/she is working on the bac
 
 Decors also speeds up your development marginally by providing middleware that reloads your page in the browser as you make changes to it.
 
+You'll see your browser open a window pointed at `http://localhost:9000/` and you can start developing your app in `./app`! Whenever you want to make a non-local request, just prepend the url with `/_decors/`.
+
 ## How to run
 
 There's two ways of running decors. Go into the `./decors` directory and run `npm install`, then pick one:

@@ -17,15 +17,16 @@
 		<li>Run <code>npm start</code> (or <code>./node_modules/.bin/grunt</code>)</li>
 		<li>Install <code>grunt-cli</code>, then run <code>grunt</code>.</li>
 	</ul>
+	<p>You'll see your browser open a window pointed at <code>http://localhost:9000/</code> and you can start developing your app in <code>./app</code>! Whenever you want to make a non-local request, just prepend the url with <code>/_decors/</code>.</p>
 	<h2>Example</h2>
-	<p>Downloaded from <span id="url"></span></p>
+	<p>Downloaded from:<br><code id="url"></code></p>
 	<pre id="example"></pre>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script>
-		var url = 'http://www.google.com/';
+		var url = 'http://localhost:9000/_decors/' + 'http://www.google.com/';
 		$('#url').text(url);
-		$.ajax('/_decors/' + url).done(function(data) {
+		$.ajax(url).done(function(data) {
 			$('#example').text(data);
 		});
 	</script>

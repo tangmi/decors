@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 	});
 	grunt.registerTask('default', [
 			'connect:livereload',
-			// 'open:server',
+			'open:server',
 			'watch:livereload'
 	]);
 	grunt.event.on('watch', function(action, filepath) {
