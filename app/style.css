@@ -1,0 +1,28 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro|Open+Sans:400,700);
+
+body {
+	background: lightgray;
+	font-family: "Open Sans", sans-serif;
+	line-height: 1.7em;
+	padding: 2em 0 5em 5em;
+	width: 600px;
+}
+
+h2 {
+	font-size: 1em;
+}
+
+pre {
+	width: 100%;
+	height: 500px;
+	overflow-x: hidden;
+	font-size: 12px;
+	line-height: 1em;
+}
+
+code, pre {
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 5px;
+	padding: 0em 0.5em;
+	font-family: "Source Code Pro";
+}
