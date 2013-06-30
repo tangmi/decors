@@ -9,6 +9,7 @@
 		"grunt": "latest",
 		"grunt-contrib-watch": "latest",
 		"grunt-contrib-connect": "latest",
+		"connect-livereload": "latest",
 		"grunt-open": "latest",
 		"matchdep": "latest"
 	},
