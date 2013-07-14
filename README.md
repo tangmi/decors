@@ -1,5 +1,7 @@
 Note: if you want to be fancy, there are many ways to disable CORS restrictions at a browser level. ([Firefox](http://stackoverflow.com/questions/7217134/disable-same-origin-check-in-firefox-6), [Chrome](http://stackoverflow.com/questions/3102819/chrome-disable-same-origin-policy))
 
+*Update: This is originally a response to the frustation from running into CORS issues in cross-domain ajax calls. It's become more useful to me as a quick and easy way to set up live code reloading on save. For me, live code reloads greaty speed of the development of front end stuff.*
+
 # decors
 
 This is a response to the frustation from running into CORS issues in cross-domain ajax calls. Decors simply acts as a proxy for you while you begin the development of your webapp (you probably don't want to use this when you go to production).
