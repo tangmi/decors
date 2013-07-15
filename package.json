@@ -1,24 +1,39 @@
 {
-  "name": "decors",
-  "version": "0.0.1",
-  "scripts": {
-    "start": "./node_modules/.bin/grunt"
-  },
-  "dependencies": {
-    "chokidar": "~0.6.2",
-    "connect-livereload": "~0.2.0",
-    "commander": "~1.3.0",
-    "express": "~3.3.4"
-  },
-  "devDependencies": {
-    "grunt": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-contrib-connect": "latest",
-    "connect-livereload": "latest",
-    "grunt-open": "latest",
-    "matchdep": "latest"
-  },
-  "engines": {
-    "node": "latest"
-  }
+	"name": "decors",
+	"description": "quick server for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
+	"author": "Michael Tang <michael@conceptquanta.com>",
+	"version": "0.0.1",
+	"scripts": {
+		"start": "./node_modules/.bin/grunt"
+	},
+	"dependencies": {
+		"chokidar": "~0.6.2",
+		"connect-livereload": "~0.2.0",
+		"commander": "~1.3.0",
+		"express": "~3.3.4",
+		"tiny-lr": "0.0.4"
+	},
+	"keywords": [
+			"cors",
+			"livereload",
+			"development",
+			"web",
+			"rest",
+			"restful",
+			"router",
+			"app",
+			"api",
+			"javascript",
+			"prototype"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tangmi/decors.git"
+	},
+	"bin": {
+		"decors": "./bin/decors"
+	},
+	"engines": {
+		"node": "*"
+	}
 }

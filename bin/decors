@@ -10,8 +10,7 @@
 /*
 	CLI stuffs
 */
-var exec = require('child_process').exec,
-	program = require('commander'),
+var program = require('commander'),
 	package = require('../package.json'),
 	path = require('path');
 
@@ -27,26 +26,61 @@ var appdir = path.resolve(program.args.shift() || '.');
 	server stuffs
 */
 var express = require('express'),
+	tinylr = require('tiny-lr'),
 	livereload = require('connect-livereload'),
 	http = require('http'),
 	https = require('https'),
-	fs = require('fs');
+	fs = require('fs'),
+	chokidar = require('chokidar');
 
 var app = express();
 
 app.set('port', program.port || 9000);
 
 // watch file tree for changes and use the livereload middleware to update the client
+var liveReloadPort = 35729;
 if (program.watch) {
-	var liveReloadPort = 35729;
+	//add in the middleware
+	app.use(require('connect-livereload')({
+		port: liveReloadPort
+	}));
 
-	app.use(function(req, res, next) {
-		console.log('using livereload');
-
-		livereload({
-			port: liveReloadPort
-		})(req, res, next);
+	//start up livereload server
+	var server = tinylr();
+	server.listen(liveReloadPort, function(err) {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		console.log('... Watching files for changes ...');
 	});
+
+	//set up file watchers
+	var watcher = chokidar.watch(appdir, {
+		ignored: /^\./,
+		persistent: true,
+		ignoreInitial: true
+	});
+
+	watcher
+		.on('add', reload)
+		.on('change', reload)
+		.on('unlink', reload)
+		.on('error', function(error) {
+		console.log(error);
+	});
+
+	function reload(file) {
+		var files = [];
+		files.push(file);
+
+		server.changed({
+			body: {
+				files: files
+			}
+		});
+	};
+
 }
 
 // reroute backend API calls to a separate backend server, avoiding all CORS issues on the client side
@@ -77,7 +111,7 @@ if (program.backend) {
 				type: req.method
 			};
 
-			if(app.get('port') == reqoptions.port) {
+			if (app.get('port') == reqoptions.port) {
 				res.end(404);
 			}
 
@@ -124,5 +158,5 @@ app.use(function(req, res, next) {
 */
 http.createServer(app).listen(app.get('port'), function() {
 	console.log('Decors server listening on port', app.get('port'));
-	console.log('with directory:', appdir);
+	console.log('serving directory:', appdir);
 });
