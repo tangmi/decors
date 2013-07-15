@@ -77,6 +77,10 @@ if (program.backend) {
 				type: req.method
 			};
 
+			if(app.get('port') == reqoptions.port) {
+				res.end(404);
+			}
+
 			console.log('Making remote call:', remotepath);
 
 			var remoterequest = protocol.request(reqoptions, function(data) {
