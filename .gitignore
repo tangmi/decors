@@ -51,22 +51,6 @@ results
 npm-debug.log
 node_modules
 
-### Eclipse ###
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
-
 # External tool builders
 .externalToolBuilders/
 
