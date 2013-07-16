@@ -56,7 +56,7 @@ If you were running jQuery, doing something like this would be totally valid:
 
 ```js
 $.ajax('/post/1').done(function(data) {
-	console.log(data);
+	console.log(data); // logs the output of http://www.example.com/post/1
 });
 ```
 
