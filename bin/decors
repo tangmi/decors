@@ -63,9 +63,11 @@ if (program.watch) {
 
 	//set up file watchers
 	var watcher = chokidar.watch(appdir, {
-		ignored: /^\./,
+		// ignored: /.*((?:\.css)|(?:\.js(on)?))$/, //matches .css, .js, .json
 		persistent: true,
-		ignoreInitial: true
+		ignoreInitial: true,
+		interval: 500,
+		binaryInterval: 3000,
 	});
 
 	watcher

@@ -84,3 +84,4 @@ Where `path` is the relative or absolute path to the web app directory and `opti
 * decors LiveReload middleware [does not work well with the LiveReload browser plugin](https://github.com/intesso/connect-livereload#use), so you may need to disable any plugins before using successfully.
 * decors will try its best to avoid infinite loops, but if any are encountered, too bad.
 * Although decors is primarily meant to act as a proxy for RESTful APIs, I've added in support for images and theoretically other filetypes, but I'd recommend sticking with JSON (and maybe images), as responses are stored in memory before sent to the client.
+* Watching very large hierarchies of files can be very CPU intensive, so be mindful with the `--watch` flag.
