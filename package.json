@@ -2,9 +2,10 @@
 	"name": "decors",
 	"description": "quick server for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
 	"author": "Michael Tang <michael@conceptquanta.com>",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"scripts": {
-		"start": "./node_modules/.bin/grunt"
+		"start": "./node_modules/.bin/grunt",
+		"postpublish": "node ./scripts/postpublish.js"
 	},
 	"dependencies": {
 		"chokidar": "~0.6.2",
@@ -15,17 +16,17 @@
 		"colors": "~0.6.0-1"
 	},
 	"keywords": [
-			"cors",
-			"livereload",
-			"development",
-			"web",
-			"rest",
-			"restful",
-			"router",
-			"app",
-			"api",
-			"javascript",
-			"prototype"
+		"cors",
+		"livereload",
+		"development",
+		"web",
+		"rest",
+		"restful",
+		"router",
+		"app",
+		"api",
+		"javascript",
+		"prototype"
 	],
 	"repository": {
 		"type": "git",
