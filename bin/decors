@@ -112,8 +112,11 @@ if (program.backend) {
 				host: remotepath.replace(regex, '$2'),
 				port: remotepath.replace(regex, '$3'),
 				path: remotepath.replace(regex, '$4'),
-				type: req.method
+				type: req.method,
+				headers: req.headers
 			};
+
+			console.log(req.headers);
 
 			if (app.get('port') == reqoptions.port) {
 				res.end(404);
