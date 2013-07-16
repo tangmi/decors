@@ -96,6 +96,10 @@ if (program.backend) {
 				req.path = '/' + req.path;
 			}
 
+			if(req.path.indexOf('favicon.ico') === 1) {
+				return;
+			}
+
 			var remotepath = program.backend + req.path;
 			if (remotepath.indexOf('http') !== 0) {
 				remotepath = 'http://' + remotepath;
