@@ -36,7 +36,8 @@ var express = require('express'),
 	http = require('http'),
 	https = require('https'),
 	fs = require('fs'),
-	chokidar = require('chokidar');
+	chokidar = require('chokidar'),
+	stream = require('stream');
 
 var app = express();
 
@@ -102,7 +103,7 @@ if (program.backend) {
 				req.path = '/' + req.path;
 			}
 
-			if(req.path.indexOf('favicon.ico') === 1) {
+			if (req.path.indexOf('favicon.ico') === 1) {
 				return;
 			}
 
@@ -128,7 +129,15 @@ if (program.backend) {
 
 			var remoterequest = protocol.request(reqoptions, function(data) {
 				var output = '';
-				data.setEncoding('utf8');
+
+				var useBinary = false; //determines the data transfer encoding
+
+				if (/image\/.+/.test(data.headers['content-type'])) {
+					useBinary = true;
+					data.setEncoding('binary');
+				} else {
+					data.setEncoding('utf8');
+				}
 
 				data.on('data', function(chunk) {
 					output += chunk;
@@ -137,17 +146,23 @@ if (program.backend) {
 				data.on('end', function() {
 					res.statusCode = data.statusCode;
 					res.headers = data.headers;
-					res.contentType(data.headers['content-type']);
-					res.send(output);
+					res.setHeader('Content-Type', data.headers['content-type']);
+					res.setHeader('Content-Length', output.length);
+					if (useBinary) {
+						res.write(output, encoding = 'binary');
+						res.end();
+					} else {
+						res.send(output);
+					}
 
 					console.log((req.method + '').green, (res.statusCode + '').magenta, 'remote'.yellow, remotepath);
-
 				});
 			});
 
 			remoterequest.on('error', function(e) {
 				res.contentType('text/plain');
-				res.send('Error: ' + e.message + '\n' + e.stack);
+				res.send(404);
+				console.log((req.method + '').green, '404'.red, 'remote'.yellow, remotepath, ('(' + e.message + ')').grey);
 			});
 
 			remoterequest.end();
