@@ -52,7 +52,7 @@ http://localhost:9000
 ==> DELETE /post/:id/remove
 ```
 
-If you were running jQuery, doing something like this would be totally valid:
+If you were running jQuery, doing something like this in `app.js` on `localhost:9000` would be totally valid:
 
 ```js
 $.ajax('/post/1').done(function(data) {
