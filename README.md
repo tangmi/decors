@@ -8,11 +8,59 @@ It will also inject middleware into all HTML pages and reload them whenever a so
 
 ## Installation
 
-Install decors with
-
 ```
 npm install -g decors
 ```
+
+
+## Explanation
+
+Suppose you have a web service that looks like this
+
+```
+http://www.example.com
+==> GET    /post/:id
+==> POST   /post/add
+==> DELETE /post/:id/remove
+```
+
+…and you want to build a super cool front end app for it.
+
+So locally you set up this app structure:
+
+```
+~/Sites
+   /index.html
+   /js
+      /app.js
+   /favicon.ico
+```
+
+You then install decors globally and run `decors ~/Sites -w -b http://www.example.com`.
+
+Now, you can develop your app as if your remote backend API is available locally:
+
+```
+http://localhost:9000
+    / [index.html]    # static files served and reloaded from ~/Sites
+    /js
+        /app.js
+    /favicon.ico
+
+==> GET    /post/:id  # remote API routed through decors and available CORS-free
+==> POST   /post/add
+==> DELETE /post/:id/remove
+```
+
+If you were running jQuery, doing something like this would be totally valid:
+
+```js
+$.ajax('/post/1').done(function(data) {
+	console.log(data);
+});
+```
+
+In the background, decors tries to act as a proxy, making the response from `http://www.example.com/post/1` available through `http://localhost:9000/post/1`.
 
 ## Usage
 
@@ -28,16 +76,11 @@ Where `path` is the relative or absolute path to the web app directory and `opti
 -p, --port <port>        set a custom port (default 9000)
 ```
 
-### Notes: 
 
-#### `--watch`
+## Notes
 
-uses a LiveReload middleware to update the `.js` and `.css` (among others) files every time you save.
-
-#### `<baseurl>`
-
-is either a hostname or a protocol and hostname. It's expected that the web app will call the backend's RESTful API as if the client code were located on the same server as the backend code. For example, if you have your backend server on `www.example.com`, with a REST API `/hello`, we can start decors with `decors -b lwww.example.com`. Whenever you want to access the backend's `/hello` API, just call `http://localhost:9000/hello` and decors will make a request for you to `www.example.com/hello`.
-
-#### `--port`
-
-will change the port on which the decors server is run.
+* decors serves static files via [Connect's static middleware](http://www.senchalabs.org/connect/static.html) (and will display `index.html` when requested a directory)
+* decors tries to serve static files before making remote calls. If you want to mock out responses from your backend you can create files in the corresponding path to their remote API calls.
+* decors LiveReload middleware [does not work well with the LiveReload browser plugin](https://github.com/intesso/connect-livereload#use), so you may need to disable any plugins before using successfully.
+* decors will try its best to avoid infinite loops, but if any are encountered, too bad.
+* Although decors is primarily meant to act as a proxy for RESTful APIs, I've added in support for images and theoretically other filetypes, but I'd recommend sticking with JSON (and maybe images), as responses are stored in memory before sent to the client.
