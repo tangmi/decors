@@ -4,7 +4,8 @@
 	"author": "Michael Tang <michael@conceptquanta.com>",
 	"version": "1.0.7",
 	"scripts": {
-		"start": "./node_modules/.bin/grunt",
+		"start": "node ./bin/decors",
+		"test": "./node_modules/.bin/mocha",
 		"postpublish": "node ./scripts/postpublish.js"
 	},
 	"dependencies": {
@@ -15,6 +16,10 @@
 		"tiny-lr": "0.0.4",
 		"colors": "~0.6.0-1",
 		"mime": "~1.2.9"
+	},
+	"devDependencies": {
+		"mocha": "~1.12.0",
+		"supertest": "~0.7.1"
 	},
 	"keywords": [
 		"cors",
