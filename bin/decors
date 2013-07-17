@@ -104,9 +104,10 @@ if (program.backend) {
 	app.use(function(req, res, next) {
 
 		//for the empty directory index.html edge case
-		if(req.path.lastIndexOf('/') == req.path.length - 1 && fs.existsSync(path.join(appdir, req.path, 'index.html'))) {
+		var indexExists = fs.existsSync(path.join(appdir, req.path, 'index.html'));
+		if(req.path.lastIndexOf('/') == req.path.length - 1 && indexExists) {
 			next();
-		} else if (fs.existsSync(path.join(appdir, req.path))) {
+		} else if (fs.existsSync(path.join(appdir, req.path)) && indexExists) {
 			next();
 		} else {
 			if (program.backend.lastIndexOf('/') === program.backend.length - 1) {
