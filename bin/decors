@@ -102,7 +102,11 @@ if (program.backend) {
 
 	console.log('Rerouting API calls to:', program.backend)
 	app.use(function(req, res, next) {
-		if (fs.existsSync(path.join(appdir, req.path, 'index.html'))) {
+
+		//for the empty directory index.html edge case
+		if(req.path.lastIndexOf('/') == req.path.length - 1 && fs.existsSync(path.join(appdir, req.path, 'index.html'))) {
+			next();
+		} else if (fs.existsSync(path.join(appdir, req.path))) {
 			next();
 		} else {
 			if (program.backend.lastIndexOf('/') === program.backend.length - 1) {
@@ -122,7 +126,7 @@ if (program.backend) {
 			}
 
 			var querystring = url.parse(req.url).query;
-			if(typeof querystring !== 'undefined') {
+			if(typeof querystring !== 'undefined' && querystring != null) {
 				remotepath += '?' + querystring;
 			}
 
