@@ -2,7 +2,7 @@
 	"name": "decors",
 	"description": "quick server for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
 	"author": "Michael Tang <michael@conceptquanta.com>",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"scripts": {
 		"start": "node ./bin/decors",
 		"test": "./node_modules/.bin/mocha --reporter spec",
