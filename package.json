@@ -5,7 +5,7 @@
 	"version": "1.0.7",
 	"scripts": {
 		"start": "node ./bin/decors",
-		"test": "./node_modules/.bin/mocha",
+		"test": "./node_modules/.bin/mocha --reporter spec",
 		"postpublish": "node ./scripts/postpublish.js"
 	},
 	"dependencies": {

@@ -21,9 +21,7 @@ testapp.post('/remote/post', function(req, res) {
 
 
 
-http.createServer(testapp).listen(testapp.get('port'), function() {
-	console.log('Testing server listening on', testapp.get('port'));
-});
+http.createServer(testapp).listen(testapp.get('port'), function() {});
 
 describe('Routing', function() {
 	var base = 'http://localhost:9000';
@@ -32,7 +30,8 @@ describe('Routing', function() {
 		decors.start({
 			dir: path.join(__dirname),
 			backend: 'localhost:9001',
-			port: 9000
+			port: 9000,
+			quiet: true
 		}, function() {
 			done();
 		});
