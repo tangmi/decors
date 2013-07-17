@@ -30,7 +30,8 @@ var express = require('express'),
 	https = require('https'),
 	fs = require('fs'),
 	chokidar = require('chokidar'),
-	stream = require('stream');
+	stream = require('stream'),
+	url = require('url');
 
 var app = express();
 
@@ -118,6 +119,11 @@ if (program.backend) {
 			var remotepath = program.backend + req.path;
 			if (remotepath.indexOf('http') !== 0) {
 				remotepath = 'http://' + remotepath;
+			}
+
+			var querystring = url.parse(req.url).query;
+			if(typeof querystring !== 'undefined') {
+				remotepath += '?' + querystring;
 			}
 
 			var regex = new RegExp('^([a-zA-Z]+)://([^/]+)(?:\:([0-9]+))(/.*)?$');
