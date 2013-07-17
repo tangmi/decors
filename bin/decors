@@ -31,7 +31,8 @@ var express = require('express'),
 	fs = require('fs'),
 	chokidar = require('chokidar'),
 	stream = require('stream'),
-	url = require('url');
+	url = require('url'),
+	mime = require('mime');
 
 var app = express();
 
@@ -117,9 +118,9 @@ if (program.backend) {
 				req.path = '/' + req.path;
 			}
 
-			if (req.path.indexOf('favicon.ico') === 1) {
-				return;
-			}
+			// if (req.path.indexOf('favicon.ico') === 1) {
+			// 	return;
+			// }
 
 			var remotepath = program.backend + req.path;
 			if (remotepath.indexOf('http') !== 0) {
@@ -149,13 +150,12 @@ if (program.backend) {
 			var remoterequest = protocol.request(reqoptions, function(data) {
 				var output = '';
 
-				var useBinary = false; //determines the data transfer encoding
+				var useutf8 = /text\/.+/.test(mime.lookup(req.path)); //determines the data transfer encoding
 
-				if (/image\/.+/.test(data.headers['content-type'])) {
-					useBinary = true;
-					data.setEncoding('binary');
-				} else {
+				if (useutf8) {
 					data.setEncoding('utf8');
+				} else {
+					data.setEncoding('binary');
 				}
 
 				data.on('data', function(chunk) {
@@ -167,11 +167,11 @@ if (program.backend) {
 					res.headers = data.headers;
 					res.setHeader('Content-Type', data.headers['content-type']);
 					res.setHeader('Content-Length', output.length);
-					if (useBinary) {
+					if (useutf8) {
+						res.send(output);
+					} else {
 						res.write(output, encoding = 'binary');
 						res.end();
-					} else {
-						res.send(output);
 					}
 
 					console.log((req.method + '').green, (res.statusCode + '').magenta, 'remote'.yellow, remotepath);
