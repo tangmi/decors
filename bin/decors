@@ -101,7 +101,7 @@ if (program.backend) {
 
 	console.log('Rerouting API calls to:', program.backend)
 	app.use(function(req, res, next) {
-		if (fs.existsSync(path.join(appdir, req.path))) {
+		if (fs.existsSync(path.join(appdir, req.path, 'index.html'))) {
 			next();
 		} else {
 			if (program.backend.lastIndexOf('/') === program.backend.length - 1) {
