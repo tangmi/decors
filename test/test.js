@@ -23,19 +23,20 @@ testapp.post('/remote/post', function(req, res) {
 
 http.createServer(testapp).listen(testapp.get('port'), function() {});
 
+
+before(function(done) {
+	decors.start({
+		dir: path.join(__dirname),
+		backend: 'localhost:9001',
+		port: 9000,
+		quiet: true
+	}, function() {
+		done();
+	});
+});
+
 describe('Routing', function() {
 	var base = 'http://localhost:9000';
-
-	before(function(done) {
-		decors.start({
-			dir: path.join(__dirname),
-			backend: 'localhost:9001',
-			port: 9000,
-			quiet: true
-		}, function() {
-			done();
-		});
-	});
 
 	describe('Static server', function() {
 		it('should serve static files', function(done) {
@@ -43,7 +44,8 @@ describe('Routing', function() {
 				.get('/get.html')
 				.expect('get static', done);
 		});
-
+	});
+	describe('Remote methods', function() {
 		it('should grab remote GET requests', function(done) {
 			var num = "5";
 			request(decors.getExpressInstance())
@@ -60,8 +62,5 @@ describe('Routing', function() {
 				})
 				.expect(num, done);
 		});
-
-
-
 	});
 });
