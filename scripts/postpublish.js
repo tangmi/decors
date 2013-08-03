@@ -25,7 +25,7 @@ fs.writeFile('package.json', JSON.stringify(package, null, '\t'), function(err) 
 });
 
 function commit(version) {
-	var commitMessage = 'Release ' + version;
+	var commitMessage = 'Release ' + oldversion;
 	exec('git add package.json', function(error, stdout, stderr) {
 		console.log('');
 		console.log('Commiting package.json: "' + commitMessage + '"');
