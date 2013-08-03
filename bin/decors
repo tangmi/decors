@@ -13,22 +13,14 @@ program.usage('[path] [options]')
 program.option('-w, --watch', 'reload app and inject css on file save');
 program.option('-b, --backend <baseurl>', 'have decors make backend requests to eliminate CORS issues')
 program.option('-p, --port <port>', 'set a custom port (default 9000)')
-
 program.on('--help', function() {
 	console.log('  Path:');
 	console.log('');
 	console.log('    directory to start the static server in. will use current directory if not supplied.');
 	console.log('');
 });
-
 program.parse(process.argv);
 
+program.dir = path.resolve(program.args.shift() || '.');
 
-var dir = path.resolve(program.args.shift() || '.');
-
-require(path.join(__dirname, '../lib/index')).start({
-	dir: dir,
-	watch: program.watch,
-	backend: program.backend,
-	port: program.port
-});
+require(path.join(__dirname, '../lib/index')).start(program);
