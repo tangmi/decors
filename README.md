@@ -1,10 +1,24 @@
 # decors
 
-Decors is a tool meant for prototyping Javascript front end web apps.
+Decors is a simple, temporary, reusable reverse proxy, with benefits.
 
-Assuming you're early in development and your client code is separate from your backend code. Decors serves up a directory containing your web app and will make and return remote calls made to a separate backend endpoint as if they were on the same server (to avoid CORS scripting restrictions).
+It was originally made to help the "extremely rapid iterations" mindset for early (or late) Javascript front-end web app development by bypassing CORS restrictions from browsers.
 
-It will also inject middleware into all HTML pages and reload them whenever a source file is changed.
+## Use cases
+
+These are a few ways I've found this software to be useful. See the [usage](#usage) for more technical explanations of features.
+
+### Rapid iterations development
+
+With Decors' `--watch` flag, it can inject LiveReload middleware into each page, initiating a reload on all browsers (even mobile) when a source file changes or a CSS injection when stylesheets are updated.
+
+### Static file server
+
+Decors, by default, will serve static files using the working directory (or specified directory) as a root directory. Having Decors serve static assets, in my experience, is quicker than having the application server, such as Tomcat, serve them (and probably better reflects a production environment where something like NginX or Varnish will be serving static assets, though Decors intentionally does not cache files).
+
+### Lazy app prototyping
+
+With the `--backend <baseurl>` flag, Decors can make a static file server, as described above, look like it has the API to your back-end service available. The back-end flag is intended to allow quick front-end prototyping by allowing a separate front-end app make calls to your API as if they were on the same server/port (thereby bypassing any sort of CORS restrictions). This lets developers create front-end web apps separate from the main back-end service and be able to merge the front- and back-end codebases without configuration changes.
 
 ## Installation
 
@@ -24,7 +38,7 @@ http://www.example.com
 ==> DELETE /post/:id/remove
 ```
 
-…and you want to build a super cool front end app for it.
+…and you want to build a super cool front-end app for it.
 
 So locally you set up this app structure:
 
@@ -38,7 +52,7 @@ So locally you set up this app structure:
 
 You then install decors globally and run `decors ~/Sites -w -b http://www.example.com`.
 
-Now, you can develop your app as if your remote backend API is available locally:
+Now, you can develop your app as if your remote back-end API is available locally:
 
 ```
 http://localhost:9000
@@ -80,7 +94,7 @@ Where `path` is the relative or absolute path to the web app directory and `opti
 ## Notes
 
 * decors serves static files via [Connect's static middleware](http://www.senchalabs.org/connect/static.html) (and will display `index.html` when requested a directory)
-* decors tries to serve static files before making remote calls. If you want to mock out responses from your backend you can create files in the corresponding path to their remote API calls.
+* decors tries to serve static files before making remote calls. If you want to mock out responses from your back-end you can create files in the corresponding path to their remote API calls.
 * decors LiveReload middleware [does not work well with the LiveReload browser plugin](https://github.com/intesso/connect-livereload#use), so you may need to disable any plugins before using successfully.
 * decors will try its best to avoid infinite loops, but if any are encountered, too bad.
 * Although decors is primarily meant to act as a proxy for RESTful APIs, I've added in support for images and theoretically other filetypes, but I'd recommend sticking with JSON (and maybe images), as responses are stored in memory before sent to the client.
