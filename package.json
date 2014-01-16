@@ -2,19 +2,19 @@
 	"name": "decors",
 	"description": "quick server for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
 	"author": "Michael Tang <michael@conceptquanta.com>",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"scripts": {
 		"start": "node ./bin/decors",
 		"test": "./node_modules/.bin/mocha --reporter spec",
 		"postpublish": "node ./scripts/postpublish.js"
 	},
 	"dependencies": {
-		"chokidar": "~0.6.2",
-		"connect-livereload": "~0.2.0",
-		"commander": "~1.3.0",
-		"express": "~3.3.4",
-		"tiny-lr": "0.0.4",
-		"colors": "~0.6.0-1",
+		"chokidar": "~0.8.1",
+		"connect-livereload": "~0.3.2",
+		"commander": "~2.1.0",
+		"express": "~3.4.8",
+		"tiny-lr": "0.0.5",
+		"colors": "~0.6.2",
 		"mime": "~1.2.9"
 	},
 	"devDependencies": {
