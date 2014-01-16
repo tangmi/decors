@@ -55,7 +55,8 @@ describe('Backend configuration', function() {
 		before(function(done) {
 			var testapp = express();
 			testapp.set('port', 9001);
-			testapp.use(express.bodyParser());
+			testapp.use(express.urlencoded());
+			testapp.use(express.json());
 			testapp.get('/remote/get/:number', function(req, res) {
 				res.send(req.param('number'));
 			});
@@ -111,7 +112,8 @@ describe('Backend configuration', function() {
 
 			var testapp = express();
 			testapp.set('port', 9001);
-			testapp.use(express.bodyParser());
+			testapp.use(express.urlencoded());
+			testapp.use(express.json());
 
 			testapp.get('/remote/gzip', function(req, res) {
 				res.setHeader('Content-Encoding', 'gzip');
