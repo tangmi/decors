@@ -17,7 +17,8 @@
     "tiny-lr": "0.0.7",
     "mime": "~1.2.9",
     "request": "^2.36.0",
-    "connect-inject": "^0.3.2"
+    "connect-inject": "^0.3.2",
+    "memorystream": "^0.2.0"
   },
   "devDependencies": {
     "mocha": "~1.12.0",
