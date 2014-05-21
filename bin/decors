@@ -12,6 +12,7 @@ program.version(package.version);
 program.usage('[path] [options]')
 program.option('-w, --watch', 'reload app and inject css on file save');
 program.option('-b, --backend <baseurl>', 'have decors make backend requests to eliminate CORS issues')
+program.option('-i, --inject <partial>.html', 'inject some partial at the end of the <head> of responses')
 program.option('-p, --port <port>', 'set a custom port (default 9000)')
 program.on('--help', function() {
 	console.log('  Path:');

@@ -1,47 +1,49 @@
 {
-	"name": "decors",
-	"description": "a simple, temporary, reusable reverse proxy, with benefits. designed for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
-	"author": "Michael Tang <michael@conceptquanta.com>",
-	"version": "1.1.7",
-	"scripts": {
-		"start": "node ./bin/decors",
-		"test": "./node_modules/.bin/mocha --reporter spec",
-		"postpublish": "node ./scripts/postpublish.js"
-	},
-	"dependencies": {
-		"chokidar": "~0.8.1",
-		"connect-livereload": "~0.3.2",
-		"commander": "~2.1.0",
-		"express": "~3.4.8",
-		"tiny-lr": "0.0.5",
-		"colors": "~0.6.2",
-		"mime": "~1.2.9"
-	},
-	"devDependencies": {
-		"mocha": "~1.12.0",
-		"supertest": "~0.7.1"
-	},
-	"keywords": [
-		"cors",
-		"livereload",
-		"development",
-		"web",
-		"rest",
-		"restful",
-		"router",
-		"app",
-		"api",
-		"javascript",
-		"prototype"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tangmi/decors.git"
-	},
-	"bin": {
-		"decors": "./bin/decors"
-	},
-	"engines": {
-		"node": "*"
-	}
+  "name": "decors",
+  "description": "a simple, temporary, reusable reverse proxy, with benefits. designed for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
+  "author": "tangmi",
+  "version": "1.1.7",
+  "scripts": {
+    "start": "node ./bin/decors",
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "postpublish": "node ./scripts/postpublish.js"
+  },
+  "dependencies": {
+    "commander": "^2.2.0",
+    "express": "^4.2.0",
+    "colors": "~0.6.2",
+    "chokidar": "~0.8.1",
+    "connect-livereload": "^0.4.0",
+    "tiny-lr": "0.0.7",
+    "mime": "~1.2.9",
+    "request": "^2.36.0",
+    "connect-inject": "^0.3.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0",
+    "supertest": "~0.7.1"
+  },
+  "keywords": [
+    "cors",
+    "livereload",
+    "development",
+    "web",
+    "rest",
+    "restful",
+    "router",
+    "app",
+    "api",
+    "javascript",
+    "prototype"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tangmi/decors.git"
+  },
+  "bin": {
+    "decors": "./bin/decors"
+  },
+  "engines": {
+    "node": "*"
+  }
 }
