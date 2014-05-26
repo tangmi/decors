@@ -1,0 +1,5 @@
+{
+	"watch": false,
+	"backend": "localhost:8080",
+	"port": 1234
+}
