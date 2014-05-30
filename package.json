@@ -2,7 +2,7 @@
 	"name": "decors",
 	"description": "a simple, temporary, reusable reverse proxy, with benefits. designed for prototyping js apps by serving static files, live code reloads, and CORS bypassing",
 	"author": "tangmi",
-	"version": "1.1.12",
+	"version": "1.1.13",
 	"scripts": {
 		"start": "node ./bin/decors",
 		"test": "./node_modules/.bin/mocha --reporter spec",
