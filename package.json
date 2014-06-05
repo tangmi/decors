@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node ./bin/decors",
 		"test": "./node_modules/.bin/mocha --reporter spec",
-		"postpublish": "node ./scripts/postpublish.js"
+		"postpublish": "./node_modules/.bin/srun --script=postpublish"
 	},
 	"dependencies": {
 		"commander": "^2.2.0",
@@ -22,7 +22,8 @@
 	},
 	"devDependencies": {
 		"mocha": "~1.12.0",
-		"supertest": "~0.7.1"
+		"supertest": "~0.7.1",
+		"srun": "latest"
 	},
 	"keywords": [
 		"cors",
